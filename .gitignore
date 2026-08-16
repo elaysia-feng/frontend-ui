@@ -1,0 +1,33 @@
+# --- 操作系统 ---
+.DS_Store
+Thumbs.db
+desktop.ini
+Desktop.ini
+$RECYCLE.BIN/
+
+# --- 编辑器 / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OMC 编排状态（本地，不提交） ---
+.omc/
+
+# --- Node / 前端构建产物 ---
+node_modules/
+dist/
+build/
+.vite/
+*.log
+
+# --- 环境变量 / 密钥 ---
+.env
+.env.*
+!.env.example
+
+# --- 压缩包 / 大文件 ---
+*.zip
+*.7z
+*.rar
