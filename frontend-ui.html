@@ -20,13 +20,16 @@ padding:12px;border-radius:19px;background:rgba(255,255,255,.78);backdrop-filter
 box-shadow:0 12px 36px rgba(40,44,60,.1);margin-bottom:24px}
 .search{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);border-radius:13px;padding:0 13px}
 .search input{width:100%;border:0;outline:0;background:transparent;padding:12px 0}
+.search input::placeholder{color:#6f7480;opacity:1}
 .filters{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
 .filter{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;cursor:pointer;transition:.2s}
 .filter:hover{transform:translateY(-1px)} .filter.active{background:#181a20;color:#fff;border-color:#181a20}
+.motionToggle{border:1px solid #d9d5ff;background:#f1efff;color:#5147b8;border-radius:999px;padding:9px 13px;cursor:pointer;font-weight:700}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px}
 .card{background:rgba(255,255,255,.9);border:1px solid rgba(255,255,255,.96);border-radius:20px;overflow:hidden;
 box-shadow:0 10px 28px rgba(32,36,48,.08);transition:.23s}
 .card:hover{transform:translateY(-5px);box-shadow:0 18px 38px rgba(32,36,48,.14)}
+.card:focus-visible,.filter:focus-visible,.motionToggle:focus-visible,.promptPanel button:focus-visible,.promptPanel select:focus-visible{outline:3px solid #8176ff;outline-offset:3px}
 .preview{height:176px;display:grid;place-items:center;padding:22px;background:linear-gradient(145deg,#fbfcff,#eef0f7);overflow:hidden;position:relative}
 .meta{padding:16px 17px 18px} .head{display:flex;justify-content:space-between;gap:10px;align-items:center}
 .name{font-weight:800} .tag{font-size:12px;padding:4px 8px;border-radius:999px;background:#eeeaff;color:#5b50c9}
@@ -35,15 +38,15 @@ box-shadow:0 10px 28px rgba(32,36,48,.08);transition:.23s}
 button,input{font:inherit}
 
 /* style previews */
-.glass{background:linear-gradient(135deg,#b9b1ff,#f5ddff,#9fddff)} .glassBox{width:78%;height:68%;border-radius:20px;background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.58);backdrop-filter:blur(16px);box-shadow:0 15px 32px rgba(67,52,150,.2);padding:22px} .glassBox span{display:block;height:10px;background:rgba(255,255,255,.7);border-radius:7px;margin:9px 0} .glassBox span:last-child{width:60%}
+.preview-glass{background:linear-gradient(135deg,#b9b1ff,#f5ddff,#9fddff)} .glassBox{width:78%;height:68%;border-radius:20px;background:rgba(255,255,255,.3);border:1px solid rgba(255,255,255,.58);backdrop-filter:blur(16px);box-shadow:0 15px 32px rgba(67,52,150,.2);padding:22px} .glassBox span{display:block;height:10px;background:rgba(255,255,255,.7);border-radius:7px;margin:9px 0} .glassBox span:last-child{width:60%}
 .neuBox{width:116px;height:116px;border-radius:28px;background:#eef1f6;box-shadow:15px 15px 30px #cbd0d8,-15px -15px 30px #fff;display:grid;place-items:center} .neuBox div{width:45px;height:45px;border-radius:50%;box-shadow:inset 6px 6px 12px #cbd0d8,inset -6px -6px 12px #fff}
 .flatBtn{border:0;padding:14px 22px;border-radius:8px;background:#327cff;color:#fff}
 .material{width:85%;background:#fff;border-radius:13px;box-shadow:0 10px 26px rgba(0,0,0,.13);overflow:hidden} .material b{display:block;height:34px;background:#7157e8} .material i{display:block;height:18px;margin:10px 12px;background:#f0eff5;border-radius:6px}
 .bento{display:grid;grid-template-columns:1.3fr .7fr;gap:8px;width:88%;height:120px} .bento i{background:linear-gradient(135deg,#d9d5ff,#a8c8ff);border-radius:14px} .bento i:nth-child(1){grid-row:span 2} .bento i:nth-child(4){background:#ffd8ee}
 .brutal{background:#ffe44d;border:4px solid #111;box-shadow:8px 8px 0 #111;padding:18px 24px;font-size:24px;font-weight:900;line-height:1}
 .minimal{width:80%;background:#fff;padding:28px;border-radius:2px} .minimal b{display:block;font-size:28px} .minimal span{color:#999}
-.dark{background:#17191f} .darkbox{width:80%;background:#222630;color:#fff;border:1px solid #353b49;border-radius:15px;padding:20px} .darkbox b{display:block;font-size:20px} .darkbox span{color:#8c96aa}
-.aurora{background:#0f1522} .aurora::before,.aurora::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;filter:blur(32px)} .aurora::before{background:#7c5cff;left:10%;top:18%} .aurora::after{background:#33d6ff;right:8%;bottom:4%}
+.preview-dark{background:#17191f} .darkbox{width:80%;background:#222630;color:#fff;border:1px solid #353b49;border-radius:15px;padding:20px} .darkbox b{display:block;font-size:20px} .darkbox span{color:#8c96aa}
+.preview-aurora{background:#0f1522} .preview-aurora::before,.preview-aurora::after{content:"";position:absolute;width:160px;height:160px;border-radius:50%;filter:blur(32px)} .preview-aurora::before{background:#7c5cff;left:10%;top:18%} .preview-aurora::after{background:#33d6ff;right:8%;bottom:4%}
 .clay{font-size:50px;color:#a46eff;background:#d9c6ff;padding:24px 34px;border-radius:34px;box-shadow:inset -10px -10px 20px rgba(94,50,150,.2),inset 8px 8px 20px rgba(255,255,255,.7),0 14px 24px rgba(106,65,178,.2)}
 
 /* navigation & feedback */
@@ -60,7 +63,7 @@ button,input{font:inherit}
 .modalMini{width:185px;background:#fff;padding:16px;border-radius:14px;box-shadow:0 18px 38px rgba(0,0,0,.18)} .modalMini p{font-size:12px;color:#777} .modalMini div{display:flex;justify-content:flex-end;gap:7px} .modalMini button{border:0;border-radius:7px;padding:6px 8px} .modalMini button:last-child{background:#6657ff;color:white}
 .drawerMini{position:absolute;left:0;top:0;bottom:0;width:56%;background:#fff;box-shadow:10px 0 28px rgba(0,0,0,.13);padding:18px;display:flex;flex-direction:column;gap:12px}
 .dropMini{position:relative} .dropMini button{background:#fff;border:1px solid #ddd;border-radius:8px;padding:8px 13px} .dropMini div{position:absolute;top:38px;left:0;width:120px;background:#fff;border-radius:9px;box-shadow:0 10px 22px rgba(0,0,0,.14);padding:7px} .dropMini span{display:block;padding:5px;font-size:12px}
-.tooltipMini{position:relative} .tooltipMini span{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:6px 8px;border-radius:6px;font-size:11px;white-space:nowrap} .tooltipMini button{border:0;background:#fff;padding:10px 14px;border-radius:9px;box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.tooltipMini{position:relative} .tooltipMini span{position:absolute;bottom:44px;left:50%;transform:translate(-50%,6px);opacity:0;background:#222;color:#fff;padding:6px 8px;border-radius:6px;font-size:11px;white-space:nowrap;transition:.2s} .tooltipMini:hover span,.tooltipMini:focus-within span{opacity:1;transform:translate(-50%,0)} .tooltipMini button{border:0;background:#fff;padding:10px 14px;border-radius:9px;box-shadow:0 8px 20px rgba(0,0,0,.08)}
 .popover{background:#fff;padding:14px;border-radius:12px;box-shadow:0 14px 30px rgba(0,0,0,.14);display:grid;gap:6px;width:160px} .popover span{font-size:12px;color:#777} .popover button{border:0;background:#6657ff;color:#fff;border-radius:7px;padding:7px}
 .toastMini{background:#28a75c;color:#fff;padding:14px 18px;border-radius:11px;box-shadow:0 12px 25px rgba(40,167,92,.25)}
 .alertMini{background:#fff3d7;color:#7a5b12;border:1px solid #f2cf75;padding:13px 16px;border-radius:10px}
@@ -112,17 +115,17 @@ button,input{font:inherit}
 
 /* motion/visual */
 .hoverBtn{border:0;padding:13px 20px;border-radius:11px;background:#7757ff;color:white;box-shadow:0 10px 20px rgba(119,87,255,.27);transition:.25s} .card:hover .hoverBtn{transform:translateY(-7px) scale(1.05);box-shadow:0 18px 30px rgba(119,87,255,.35)}
-.transitionMini{display:flex;align-items:center;gap:15px} .transitionMini b,.transitionMini i{padding:10px 14px;border-radius:9px;background:#2e76d2;color:#fff;font-style:normal} .transitionMini i{opacity:.35}
-.heart{font-size:52px;color:#ff5c7a;animation:pulseAnim 1.1s infinite} @keyframes pulseAnim{50%{transform:scale(1.2)}}
-.scene{width:90%;height:110px;position:relative;overflow:hidden;border-radius:13px;background:linear-gradient(#a7d7ff,#eef7ff)} .scene i,.scene b{position:absolute;left:-10%;right:-10%;bottom:-22px;height:70px;background:#8b9ebd;clip-path:polygon(0 100%,15% 45%,25% 75%,42% 20%,60% 74%,78% 38%,100% 100%)} .scene b{bottom:-38px;background:#61718a;transform:scale(1.12)} .scene span{position:absolute;right:15px;top:10px}
+.transitionMini{display:flex;align-items:center;gap:15px} .transitionMini b,.transitionMini i{padding:10px 14px;border-radius:9px;background:#2e76d2;color:#fff;font-style:normal} .transitionMini i{animation:stateSwap 1.8s ease-in-out infinite alternate} @keyframes stateSwap{from{opacity:.28;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.likeButton{display:flex;align-items:center;gap:8px;border:0;background:#fff;border-radius:999px;padding:10px 15px;color:#9a4b5b;box-shadow:0 10px 24px rgba(77,31,45,.12);cursor:pointer;transition:.22s}.likeButton .heart{font-size:28px;line-height:1}.likeButton.active{color:#e14467;transform:scale(1.06)}.likeButton.active .heart{animation:likePop .38s cubic-bezier(.34,1.56,.64,1)}@keyframes likePop{50%{transform:scale(1.35) rotate(-8deg)}}
+.scene{width:90%;height:110px;position:relative;overflow:hidden;border-radius:13px;background:linear-gradient(#a7d7ff,#eef7ff)} .scene i,.scene b{position:absolute;left:-10%;right:-10%;bottom:-22px;height:70px;background:#8b9ebd;clip-path:polygon(0 100%,15% 45%,25% 75%,42% 20%,60% 74%,78% 38%,100% 100%);animation:parallaxNear 2.8s ease-in-out infinite alternate} .scene b{bottom:-38px;background:#61718a;transform:scale(1.12);animation-name:parallaxFar;animation-duration:4s} .scene span{position:absolute;right:15px;top:10px;animation:sunFloat 3s ease-in-out infinite alternate}@keyframes parallaxNear{to{transform:translateX(-12px)}}@keyframes parallaxFar{to{transform:translateX(9px) scale(1.12)}}@keyframes sunFloat{to{transform:translateY(8px)}}
 .reveal span,.reveal b{display:block;padding:10px 20px;border-radius:10px;background:#fff;box-shadow:0 9px 20px rgba(0,0,0,.08);animation:reveal 1.8s infinite alternate} .reveal b{margin-top:8px;animation-delay:.3s} @keyframes reveal{from{opacity:.2;transform:translateY(12px)}to{opacity:1;transform:none}}
 .shimmer{width:80%;height:90px;border-radius:14px;background:linear-gradient(110deg,#d9dce5 15%,#fff 30%,#d9dce5 45%);background-size:200% 100%;animation:shimmerAnim 1.3s linear infinite} @keyframes shimmerAnim{to{background-position:-200% 0}}
-.pulse{width:66px;height:66px;border-radius:50%;background:#6657ff;box-shadow:0 0 0 0 rgba(102,87,255,.4);animation:pulseRing 1.5s infinite} @keyframes pulseRing{70%{box-shadow:0 0 0 28px rgba(102,87,255,0)}}
-.marquee{width:95%;overflow:hidden;white-space:nowrap;background:#191c22;color:#fff;padding:12px;border-radius:9px} .marquee span{display:inline-block;animation:marqueeAnim 5s linear infinite} @keyframes marqueeAnim{to{transform:translateX(-50%)}}
-.orbit{position:relative;width:90px;height:90px;border:2px dashed #cbd0db;border-radius:50%;animation:spin 4s linear infinite} .orbit i,.orbit b{position:absolute;width:22px;height:22px;border-radius:50%;background:#6657ff} .orbit i{top:-11px;left:34px} .orbit b{bottom:3px;right:-4px;background:#ff79a8}
+.pulseStatus{display:flex;align-items:center;gap:11px;background:#fff;border-radius:999px;padding:12px 16px;box-shadow:0 10px 24px rgba(27,89,55,.12);font-size:13px;font-weight:700}.pulse{width:13px;height:13px;border-radius:50%;background:#27a65c;box-shadow:0 0 0 0 rgba(39,166,92,.42);animation:pulseRing 1.5s infinite} @keyframes pulseRing{70%{box-shadow:0 0 0 13px rgba(39,166,92,0)}}
+.marquee{width:95%;overflow:hidden;white-space:nowrap;background:#191c22;color:#fff;padding:12px 0;border-radius:9px}.marqueeTrack{display:flex;width:max-content;animation:marqueeAnim 8s linear infinite}.marquee:hover .marqueeTrack{animation-play-state:paused}.marqueeTrack span{padding-right:30px}@keyframes marqueeAnim{to{transform:translateX(-50%)}}
+.successMotion{position:relative;width:86px;height:86px;border-radius:50%;background:#e2f8e9;display:grid;place-items:center;color:#239b51;font-size:42px;font-weight:900;animation:successIn 1.8s ease-in-out infinite}.successMotion::after{content:"";position:absolute;inset:-8px;border:2px solid rgba(35,155,81,.22);border-radius:50%;animation:successRing 1.8s ease-out infinite}@keyframes successIn{0%,20%{opacity:.25;transform:scale(.72)}45%,100%{opacity:1;transform:none}}@keyframes successRing{0%,30%{opacity:0;transform:scale(.7)}60%{opacity:1}100%{opacity:0;transform:scale(1.2)}}
 .pageTrans{display:flex;gap:12px;align-items:center} .pageTrans i,.pageTrans span{font-style:normal;padding:16px 20px;border-radius:12px;background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.08)} .pageTrans span{animation:pageSwap 1.6s infinite alternate} @keyframes pageSwap{from{opacity:.35;transform:translateX(12px)}to{opacity:1;transform:none}}
 .gradientBox{width:88%;height:100px;border-radius:18px;background:linear-gradient(120deg,#ff74b7,#a978ff,#65d4ff)}
-.backdrop{background:linear-gradient(135deg,#ffbed4,#7cc8ff)} .backdropBox{width:75%;height:68%;border-radius:17px;background:rgba(255,255,255,.25);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.55)}
+.preview-backdrop{background:linear-gradient(135deg,#ffbed4,#7cc8ff)} .backdropBox{width:75%;height:68%;border-radius:17px;background:rgba(255,255,255,.25);backdrop-filter:blur(15px);border:1px solid rgba(255,255,255,.55)}
 .shadowBox{width:150px;height:82px;border-radius:14px;background:#fff;box-shadow:0 22px 30px rgba(0,0,0,.18)}
 .radiusBox{width:160px;height:84px;border-radius:34px;background:#fff;border:2px solid #eceef3;display:grid;place-items:center;font-weight:700}
 .spaceBox{width:80%;background:#fff;padding:28px} .spaceBox b{display:block;font-size:20px} .spaceBox span{color:#999;font-size:11px}
@@ -131,6 +134,16 @@ button,input{font:inherit}
 .glow{font-size:30px;font-weight:900;color:#77f1ff;text-shadow:0 0 7px #3bdfff,0 0 22px #6d5cff;background:#111629;padding:20px;border-radius:12px}
 .noise{width:84%;height:105px;border-radius:14px;display:grid;place-items:center;font-weight:800;background-color:#e9e1ff;background-image:radial-gradient(rgba(0,0,0,.16) .7px,transparent .7px);background-size:4px 4px}
 .mesh{width:90%;height:108px;border-radius:16px;background:radial-gradient(circle at 20% 30%,#ff8db5,transparent 35%),radial-gradient(circle at 80% 25%,#72d5ff,transparent 35%),radial-gradient(circle at 55% 80%,#9e7bff,transparent 40%),#f8ddff}
+
+/* added modules */
+.lineChart{width:90%;height:118px;border-radius:15px;background:#fff;padding:13px;box-shadow:0 9px 22px rgba(0,0,0,.07)}.lineChart svg{width:100%;height:100%}.lineChart .gridLine{stroke:#e7e9ef;stroke-width:1}.lineChart .chartLine{fill:none;stroke:#5e67d8;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.lineChart .chartArea{fill:url(#chartFill)}
+.donutChart{display:flex;align-items:center;gap:16px}.donutRing{width:92px;height:92px;border-radius:50%;background:conic-gradient(#5e67d8 0 62%,#e6e8ef 62%);display:grid;place-items:center}.donutRing::after{content:"62%";width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;font-weight:900}.donutLegend{display:grid;gap:6px;font-size:11px}.donutLegend b{font-size:15px}
+.filterBarMini{width:94%;display:flex;gap:7px;align-items:center;background:#fff;padding:10px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,.07)}.filterBarMini span{padding:7px 9px;border:1px solid #e1e3ea;border-radius:8px;font-size:10px}.filterBarMini b{margin-left:auto;background:#252832;color:#fff;padding:8px 10px;border-radius:8px;font-size:10px}
+.loginMini{width:82%;display:grid;gap:8px;background:#fff;padding:15px;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.08)}.loginMini b{font-size:15px}.loginMini span{border:1px solid #dfe2e9;border-radius:8px;padding:8px;color:#9095a0;font-size:10px}.loginMini i{font-style:normal;background:#5e67d8;color:#fff;text-align:center;border-radius:8px;padding:8px;font-size:11px}
+.noticeMini{width:88%;background:#fff;border-radius:14px;box-shadow:0 10px 24px rgba(0,0,0,.08);overflow:hidden}.noticeMini b{display:block;padding:10px 12px;border-bottom:1px solid #eceef3}.noticeMini span{display:block;padding:8px 12px;font-size:10px;color:#606572}.noticeMini span::before{content:"";display:inline-block;width:7px;height:7px;background:#5e67d8;border-radius:50%;margin-right:7px}
+.dropZoneMini{width:86%;height:112px;border:2px dashed #aeb4c2;border-radius:15px;display:grid;place-items:center;text-align:center;color:#717785;transition:.2s}.dropZoneMini b{display:block;color:#343842;font-size:13px}.dropZoneMini span{font-size:10px}.card:hover .dropZoneMini{border-color:#5e67d8;background:#f5f4ff;transform:scale(.98)}
+
+.motion-paused *{animation-play-state:paused!important}
 
 @media(max-width:820px){.toolbar{grid-template-columns:1fr;position:static}.filters{justify-content:flex-start}.hero{align-items:flex-start;flex-direction:column}.app{padding:22px 14px 48px}}
 
@@ -142,32 +155,34 @@ article.card{cursor:pointer}
 .promptClose{position:absolute;right:16px;top:14px;border:0;background:#f0f1f5;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:22px}
 .promptEyebrow{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#6657ff}
 .promptPanel h2{margin:8px 0 5px;font-size:28px}.promptMeta{font-size:13px;color:#777d89;margin-bottom:16px}
+.promptOptions{display:grid;gap:6px;margin:0 0 12px;font-size:12px;font-weight:800;color:#505561}.promptOptions select{border:1px solid #dfe2e9;border-radius:10px;background:#fff;padding:9px 11px;color:#20232b}
 #promptText{width:100%;min-height:260px;resize:vertical;border:1px solid #e0e3ea;border-radius:15px;padding:16px;background:#f8f9fc;color:#20232b;line-height:1.75;outline:none}
 .promptActions{display:flex;justify-content:flex-end;gap:10px;margin-top:15px}.promptActions button{border:0;border-radius:11px;padding:10px 15px;cursor:pointer;font-weight:700}
 .secondaryBtn{background:#eceef3;color:#353942}.copyBtn{background:#6657ff;color:white}
 
 .sceneLine{margin-top:9px;font-size:12px;color:#4f5561;background:#f6f7fb;border-radius:9px;padding:8px 9px;line-height:1.45}
 .promptScene{margin:10px 0 14px;padding:11px 13px;border-radius:12px;background:#f1efff;color:#5147b8;font-size:13px;font-weight:700}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 </style>
 </head>
 <body>
 <div class="app">
 <header class="hero">
 <div><h1>Frontend UI Gallery Pro</h1><p>前端 UI 风格、组件、布局、动效与视觉效果速查。支持中文 / 英文搜索与分类筛选。</p></div>
-<div class="counter"><b id="count">0</b> / <span id="totalCount">92</span> 个效果</div>
+<div class="counter"><b id="count">0</b> / <span id="totalCount">98</span> 个效果</div>
 </header>
 <section class="toolbar">
 <label class="search">⌕ <input id="q" placeholder="搜索：毛玻璃 / modal / table / 动效 / layout ..."/></label>
-<div class="filters"><button class="filter active" data-c="all">全部</button><button class="filter" data-c="style">设计风格</button><button class="filter" data-c="navigation">导航</button><button class="filter" data-c="feedback">反馈</button><button class="filter" data-c="form">表单</button><button class="filter" data-c="data">数据展示</button><button class="filter" data-c="layout">布局</button><button class="filter" data-c="motion">动效</button><button class="filter" data-c="visual">视觉效果</button><button class="filter" data-c="interaction">交互</button></div>
+<div class="filters"><button class="filter active" data-c="all">全部</button><button class="filter" data-c="style">设计风格</button><button class="filter" data-c="navigation">导航</button><button class="filter" data-c="feedback">反馈</button><button class="filter" data-c="form">表单</button><button class="filter" data-c="data">数据展示</button><button class="filter" data-c="layout">布局</button><button class="filter" data-c="motion">动效</button><button class="filter" data-c="visual">视觉效果</button><button class="filter" data-c="interaction">交互</button><button aria-pressed="false" class="motionToggle" id="motionToggle" type="button">暂停动效</button></div>
 </section>
 <main class="grid" id="grid"><article class="card" data-cat="style" data-key="glass 毛玻璃 磨砂 backdrop blur frosted" data-prompt="场景：AI 助手控制台首页。
 
 请围绕这个真实业务场景设计「Glassmorphism」组件/效果：顶部放模型状态与今日调用量，中部用半透明卡片展示会话、Token、成本和最近任务；背景使用柔和紫蓝渐变与模糊光斑。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI 助手控制台首页">
-<div class="preview glass"><div class="glassBox"><span></span><span></span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI 助手控制台首页">
+<div class="preview preview-glass"><div class="glassBox"><span></span><span></span></div></div>
 <div class="meta"><div class="head"><span class="name">Glassmorphism</span><span class="tag">毛玻璃 / 磨砂玻璃</span></div>
 <div class="desc">半透明背景 + backdrop-filter 模糊。</div><div class="sceneLine">场景：AI 助手控制台首页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -175,10 +190,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Neumorphism」组件/效果：用凸起按钮控制灯光、空调、窗帘，开关和旋钮具有按压反馈，整体低对比浅灰配色。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="智能家居控制面板">
-<div class="preview neu"><div class="neuBox"><div></div></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="智能家居控制面板">
+<div class="preview preview-neu"><div class="neuBox"><div></div></div></div>
 <div class="meta"><div class="head"><span class="name">Neumorphism</span><span class="tag">新拟态</span></div>
 <div class="desc">软阴影模拟凸起/凹陷。</div><div class="sceneLine">场景：智能家居控制面板</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -186,10 +201,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Flat Design」组件/效果：左侧产品价值说明，右侧注册表单；按钮和信息层级依靠纯色块与排版区分，不使用复杂阴影。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="SaaS 注册页">
-<div class="preview flat"><button class="flatBtn">Action</button></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="SaaS 注册页">
+<div class="preview preview-flat"><button class="flatBtn">Action</button></div>
 <div class="meta"><div class="head"><span class="name">Flat Design</span><span class="tag">扁平化</span></div>
 <div class="desc">去除多余立体装饰，强调清晰层级。</div><div class="sceneLine">场景：SaaS 注册页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -197,10 +212,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Material Design」组件/效果：使用 App Bar、FAB、列表卡片和 Snackbar，交互遵循 Material 组件规范。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="移动端任务管理后台">
-<div class="preview material"><div class="material"><b></b><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="移动端任务管理后台">
+<div class="preview preview-material"><div class="material"><b></b><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Material Design</span><span class="tag">Material 风格</span></div>
 <div class="desc">Google 的组件化视觉体系。</div><div class="sceneLine">场景：移动端任务管理后台</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -208,10 +223,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Bento Grid」组件/效果：用大小不一的卡片展示项目、技术栈、GitHub 数据、博客、联系方式和实时状态。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="个人开发者作品集首页">
-<div class="preview bento"><div class="bento"><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="个人开发者作品集首页">
+<div class="preview preview-bento"><div class="bento"><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Bento Grid</span><span class="tag">便当盒布局</span></div>
 <div class="desc">不规则卡片组合，适合首页与 Dashboard。</div><div class="sceneLine">场景：个人开发者作品集首页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -219,10 +234,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Brutalism」组件/效果：黑白高对比、大字号、粗边框、硬阴影和不规则排版，突出实验性视觉。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="独立设计工作室官网">
-<div class="preview brutal"><div class="brutal">BRUTAL<br/>UI</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="独立设计工作室官网">
+<div class="preview preview-brutal"><div class="brutal">BRUTAL<br/>UI</div></div>
 <div class="meta"><div class="head"><span class="name">Brutalism</span><span class="tag">粗野主义</span></div>
 <div class="desc">高对比、粗边框、直接的排版。</div><div class="sceneLine">场景：独立设计工作室官网</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -230,10 +245,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Minimalism」组件/效果：大面积留白、极少按钮、细字体和大图，让内容本身成为视觉中心。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="高端摄影作品集">
-<div class="preview minimal"><div class="minimal"><b>Less.</b><span>More focus.</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="高端摄影作品集">
+<div class="preview preview-minimal"><div class="minimal"><b>Less.</b><span>More focus.</span></div></div>
 <div class="meta"><div class="head"><span class="name">Minimalism</span><span class="tag">极简主义</span></div>
 <div class="desc">减少装饰，依靠留白和排版建立层级。</div><div class="sceneLine">场景：高端摄影作品集</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -241,10 +256,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Dark UI」组件/效果：深色背景展示服务状态、日志、告警、CPU/内存图表，关键异常使用高亮色。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="开发者监控控制台">
-<div class="preview dark"><div class="darkbox"><b>Dashboard</b><span>42,819 views</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="开发者监控控制台">
+<div class="preview preview-dark"><div class="darkbox"><b>Dashboard</b><span>42,819 views</span></div></div>
 <div class="meta"><div class="head"><span class="name">Dark UI</span><span class="tag">深色界面</span></div>
 <div class="desc">深色背景 + 高对比内容。</div><div class="sceneLine">场景：开发者监控控制台</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -252,10 +267,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Aurora UI」组件/效果：深色背景叠加紫蓝极光光晕，Hero 区展示一句核心卖点和产品演示按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI 产品 Landing Page">
-<div class="preview aurora"><div class="aurora"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI 产品 Landing Page">
+<div class="preview preview-aurora"><div class="aurora"></div></div>
 <div class="meta"><div class="head"><span class="name">Aurora UI</span><span class="tag">极光渐变</span></div>
 <div class="desc">多层模糊渐变形成光晕背景。</div><div class="sceneLine">场景：AI 产品 Landing Page</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -263,10 +278,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Claymorphism」组件/效果：用圆润厚实的卡片、按钮和角色图标构建亲和、玩具感的界面。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="儿童学习应用首页">
-<div class="preview clay"><div class="clay">●</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="儿童学习应用首页">
+<div class="preview preview-clay"><div class="clay">●</div></div>
 <div class="meta"><div class="head"><span class="name">Claymorphism</span><span class="tag">黏土拟态</span></div>
 <div class="desc">圆润、厚重阴影、柔软的 3D 感。</div><div class="sceneLine">场景：儿童学习应用首页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -274,10 +289,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Navbar」组件/效果：包含 Logo、产品、解决方案、价格、文档、登录和主要 CTA，滚动时可吸顶。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="企业官网顶部导航">
-<div class="preview navbar"><div class="navmini"><b>Home</b><span>About</span><span>Docs</span><span>Login</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="企业官网顶部导航">
+<div class="preview preview-navbar"><div class="navmini"><b>Home</b><span>About</span><span>Docs</span><span>Login</span></div></div>
 <div class="meta"><div class="head"><span class="name">Navbar</span><span class="tag">顶部导航栏</span></div>
 <div class="desc">页面顶部主导航。</div><div class="sceneLine">场景：企业官网顶部导航</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -285,10 +300,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Sidebar」组件/效果：左侧放 Dashboard、用户、订单、日志、设置等一级菜单，支持当前菜单高亮和折叠。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="后台管理系统">
-<div class="preview sidebar"><div class="sideMini"><b>◆ Dashboard</b><span>Profile</span><span>Messages</span><span>Settings</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="后台管理系统">
+<div class="preview preview-sidebar"><div class="sideMini"><b>◆ Dashboard</b><span>Profile</span><span>Messages</span><span>Settings</span></div></div>
 <div class="meta"><div class="head"><span class="name">Sidebar</span><span class="tag">侧边栏</span></div>
 <div class="desc">后台系统常见纵向导航。</div><div class="sceneLine">场景：后台管理系统</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -296,10 +311,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Breadcrumb」组件/效果：在商品标题上方显示 首页 / 数码 / 耳机 / 当前商品，帮助用户返回上级分类。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="电商商品详情页">
-<div class="preview breadcrumb"><div class="crumb">Home <b>›</b> Library <b>›</b> UI</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="电商商品详情页">
+<div class="preview preview-breadcrumb"><div class="crumb">Home <b>›</b> Library <b>›</b> UI</div></div>
 <div class="meta"><div class="head"><span class="name">Breadcrumb</span><span class="tag">面包屑</span></div>
 <div class="desc">展示当前页面路径层级。</div><div class="sceneLine">场景：电商商品详情页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -307,10 +322,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Tabs」组件/效果：将概览、订单、操作日志、权限分别放到标签页中，避免单页信息过长。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="用户详情页">
-<div class="preview tabs"><div class="tabsMini"><b>Overview</b><span>Metrics</span><span>Logs</span><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="用户详情页">
+<div class="preview preview-tabs"><div class="tabsMini"><b>Overview</b><span>Metrics</span><span>Logs</span><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Tabs</span><span class="tag">标签页</span></div>
 <div class="desc">同一区域切换不同内容。</div><div class="sceneLine">场景：用户详情页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -318,10 +333,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Pagination」组件/效果：底部提供页码、上一页/下一页、每页条数和总记录数。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="订单列表">
-<div class="preview pagination"><div class="pages"><span>‹</span><span>1</span><b>2</b><span>3</span><span>›</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="订单列表">
+<div class="preview preview-pagination"><div class="pages"><span>‹</span><span>1</span><b>2</b><span>3</span><span>›</span></div></div>
 <div class="meta"><div class="head"><span class="name">Pagination</span><span class="tag">分页</span></div>
 <div class="desc">列表数据分页导航。</div><div class="sceneLine">场景：订单列表</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -329,10 +344,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Stepper」组件/效果：分为填写资料、上传证件、确认信息、审核结果四步，并明确当前步骤。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="企业实名认证流程">
-<div class="preview stepper"><div class="stepper"><b>1</b><i></i><b>2</b><i></i><span>3</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="企业实名认证流程">
+<div class="preview preview-stepper"><div class="stepper"><b>1</b><i></i><b>2</b><i></i><span>3</span></div></div>
 <div class="meta"><div class="head"><span class="name">Stepper</span><span class="tag">步骤条</span></div>
 <div class="desc">展示多步骤流程当前进度。</div><div class="sceneLine">场景：企业实名认证流程</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -340,10 +355,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Bottom Navigation」组件/效果：底部固定 首页、发现、发布、消息、我的 五个入口。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="移动端社交应用">
-<div class="preview bottomnav"><div class="bottomNav"><span>⌂</span><b>◉</b><span>♡</span><span>☻</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="移动端社交应用">
+<div class="preview preview-bottomnav"><div class="bottomNav"><span>⌂</span><b>◉</b><span>♡</span><span>☻</span></div></div>
 <div class="meta"><div class="head"><span class="name">Bottom Navigation</span><span class="tag">底部导航</span></div>
 <div class="desc">移动端常见底部主导航。</div><div class="sceneLine">场景：移动端社交应用</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -351,10 +366,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Command Palette」组件/效果：按 Ctrl/Cmd+K 打开命令面板，可搜索页面、执行操作、切换主题、跳转项目。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="开发者工具">
-<div class="preview command"><div class="command"><div>⌕ Search commands...</div><span>Open file <kbd>⌘P</kbd></span><span>Theme <kbd>⌘K</kbd></span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="开发者工具">
+<div class="preview preview-command"><div class="command"><div>⌕ Search commands...</div><span>Open file <kbd>⌘P</kbd></span><span>Theme <kbd>⌘K</kbd></span></div></div>
 <div class="meta"><div class="head"><span class="name">Command Palette</span><span class="tag">命令面板</span></div>
 <div class="desc">类似 VSCode 的快捷命令搜索。</div><div class="sceneLine">场景：开发者工具</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -362,10 +377,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Mega Menu」组件/效果：鼠标悬停“产品”后展开多列菜单，按计算、存储、数据库、AI 分类展示入口。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="云服务平台官网">
-<div class="preview mega"><div class="mega"><b>Products</b><div><span>Analytics</span><span>AI</span><span>Cloud</span></div></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="云服务平台官网">
+<div class="preview preview-mega"><div class="mega"><b>Products</b><div><span>Analytics</span><span>AI</span><span>Cloud</span></div></div></div>
 <div class="meta"><div class="head"><span class="name">Mega Menu</span><span class="tag">大型菜单</span></div>
 <div class="desc">用于大型站点的多列导航菜单。</div><div class="sceneLine">场景：云服务平台官网</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -373,10 +388,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Anchor Navigation」组件/效果：左侧显示章节目录，点击后平滑滚动到对应标题，并高亮当前阅读章节。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="长篇技术文档">
-<div class="preview anchor"><div class="anchor"><b>01 Intro</b><span>02 Usage</span><span>03 API</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="长篇技术文档">
+<div class="preview preview-anchor"><div class="anchor"><b>01 Intro</b><span>02 Usage</span><span>03 API</span></div></div>
 <div class="meta"><div class="head"><span class="name">Anchor Navigation</span><span class="tag">锚点导航</span></div>
 <div class="desc">点击后滚动到页面指定区域。</div><div class="sceneLine">场景：长篇技术文档</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -384,10 +399,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Modal / Dialog」组件/效果：用户点击删除后弹出危险确认框，明确项目名、不可恢复提示，并提供取消和确认删除按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="删除项目确认">
-<div class="preview modal"><div class="modalMini"><b>Confirm action</b><p>Are you sure?</p><div><button>Cancel</button><button>Confirm</button></div></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="删除项目确认">
+<div class="preview preview-modal"><div class="modalMini"><b>Confirm action</b><p>Are you sure?</p><div><button>Cancel</button><button>Confirm</button></div></div></div>
 <div class="meta"><div class="head"><span class="name">Modal / Dialog</span><span class="tag">模态弹窗</span></div>
 <div class="desc">覆盖当前页面的重要交互。</div><div class="sceneLine">场景：删除项目确认</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -395,10 +410,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Drawer」组件/效果：移动端点击筛选后从右侧拉出价格、品牌、评分、配送方式等筛选项。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="电商筛选面板">
-<div class="preview drawer"><div class="drawerMini"><b>Menu</b><span>Home</span><span>Profile</span><span>Settings</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="电商筛选面板">
+<div class="preview preview-drawer"><div class="drawerMini"><b>Menu</b><span>Home</span><span>Profile</span><span>Settings</span></div></div>
 <div class="meta"><div class="head"><span class="name">Drawer</span><span class="tag">抽屉</span></div>
 <div class="desc">从页面边缘滑出的面板。</div><div class="sceneLine">场景：电商筛选面板</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -406,10 +421,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Dropdown」组件/效果：每行右侧“更多”按钮展开编辑、复制链接、禁用、删除等操作。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="表格行操作">
-<div class="preview dropdown"><div class="dropMini"><button>Options⌄</button><div><span>Edit</span><span>Duplicate</span><span>Delete</span></div></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="表格行操作">
+<div class="preview preview-dropdown"><div class="dropMini"><button>Options⌄</button><div><span>Edit</span><span>Duplicate</span><span>Delete</span></div></div></div>
 <div class="meta"><div class="head"><span class="name">Dropdown</span><span class="tag">下拉菜单</span></div>
 <div class="desc">触发后展开一组操作。</div><div class="sceneLine">场景：表格行操作</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -417,10 +432,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Tooltip」组件/效果：鼠标悬停 DAU、CTR、P95 等指标名时展示简短解释与计算方式。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="数据指标解释">
-<div class="preview tooltip"><div class="tooltipMini"><span>Tooltip text</span><button>Hover me</button></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="数据指标解释">
+<div class="preview preview-tooltip"><div class="tooltipMini"><span>Tooltip text</span><button>Hover me</button></div></div>
 <div class="meta"><div class="head"><span class="name">Tooltip</span><span class="tag">悬浮提示</span></div>
 <div class="desc">补充解释的小型浮层。</div><div class="sceneLine">场景：数据指标解释</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -428,10 +443,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Popover」组件/效果：点击头像后显示姓名、角色、邮箱、在线状态以及查看资料按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="成员信息卡">
-<div class="preview popover"><div class="popover"><b>User profile</b><span>@elias</span><button>Follow</button></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="成员信息卡">
+<div class="preview preview-popover"><div class="popover"><b>User profile</b><span>@elias</span><button>Follow</button></div></div>
 <div class="meta"><div class="head"><span class="name">Popover</span><span class="tag">气泡卡片</span></div>
 <div class="desc">比 Tooltip 更复杂的浮层。</div><div class="sceneLine">场景：成员信息卡</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -439,10 +454,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Toast」组件/效果：用户修改设置后右下角弹出“保存成功”，2-3 秒后自动消失。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="保存成功反馈">
-<div class="preview toast"><div class="toastMini">✓ Saved successfully</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="保存成功反馈">
+<div class="preview preview-toast"><div class="toastMini">✓ Saved successfully</div></div>
 <div class="meta"><div class="head"><span class="name">Toast</span><span class="tag">轻提示</span></div>
 <div class="desc">不打断操作的短暂消息。</div><div class="sceneLine">场景：保存成功反馈</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -450,10 +465,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Alert」组件/效果：页面顶部持续展示维护时间、影响范围以及查看详情链接。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="系统维护通知">
-<div class="preview alert"><div class="alertMini">⚠ Please check your input.</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="系统维护通知">
+<div class="preview preview-alert"><div class="alertMini">⚠ Please check your input.</div></div>
 <div class="meta"><div class="head"><span class="name">Alert</span><span class="tag">警告提示</span></div>
 <div class="desc">页面内持续显示的重要状态。</div><div class="sceneLine">场景：系统维护通知</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -461,10 +476,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Snackbar」组件/效果：删除一条记录后底部提示“已删除”，同时提供 Undo 操作。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="误删恢复">
-<div class="preview snackbar"><div class="snack">File deleted <b>UNDO</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="误删恢复">
+<div class="preview preview-snackbar"><div class="snack">File deleted <b>UNDO</b></div></div>
 <div class="meta"><div class="head"><span class="name">Snackbar</span><span class="tag">底部通知</span></div>
 <div class="desc">底部短暂通知，可附带操作。</div><div class="sceneLine">场景：误删恢复</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -472,10 +487,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Skeleton Screen」组件/效果：网络请求未完成时先展示头像、标题、摘要和图片占位骨架。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="文章列表加载">
-<div class="preview skeleton"><div class="skel"><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="文章列表加载">
+<div class="preview preview-skeleton"><div class="skel"><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Skeleton Screen</span><span class="tag">骨架屏</span></div>
 <div class="desc">加载前使用占位块。</div><div class="sceneLine">场景：文章列表加载</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -483,10 +498,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Progress Bar」组件/效果：展示上传百分比、当前速度、已上传容量和取消按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="大文件上传">
-<div class="preview progress"><div class="prog"><span></span><b>68%</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="大文件上传">
+<div class="preview preview-progress"><div class="prog"><span></span><b>68%</b></div></div>
 <div class="meta"><div class="head"><span class="name">Progress Bar</span><span class="tag">进度条</span></div>
 <div class="desc">展示任务完成比例。</div><div class="sceneLine">场景：大文件上传</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -494,10 +509,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Spinner」组件/效果：用户点击提交后按钮内显示小型旋转加载，避免重复点击。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="提交表单等待">
-<div class="preview spinner"><div class="spinner"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="提交表单等待">
+<div class="preview preview-spinner"><div class="spinner"></div></div>
 <div class="meta"><div class="head"><span class="name">Spinner</span><span class="tag">加载旋转器</span></div>
 <div class="desc">短时间请求的加载反馈。</div><div class="sceneLine">场景：提交表单等待</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -505,10 +520,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Empty State」组件/效果：空列表中放简洁插图、说明文字和“创建第一个项目”按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="暂无项目">
-<div class="preview empty"><div class="state">⌁<b>No data</b><span>Create your first item</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="暂无项目">
+<div class="preview preview-empty"><div class="state">⌁<b>No data</b><span>Create your first item</span></div></div>
 <div class="meta"><div class="head"><span class="name">Empty State</span><span class="tag">空状态</span></div>
 <div class="desc">列表无数据时的占位说明。</div><div class="sceneLine">场景：暂无项目</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -516,10 +531,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Error State」组件/效果：展示错误原因、请求 ID，以及“重新加载”和“返回首页”操作。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="接口加载失败">
-<div class="preview error"><div class="state errorState">!</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="接口加载失败">
+<div class="preview preview-error"><div class="state errorState">!</div></div>
 <div class="meta"><div class="head"><span class="name">Error State</span><span class="tag">错误状态</span></div>
 <div class="desc">请求或页面异常的视觉反馈。</div><div class="sceneLine">场景：接口加载失败</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -527,10 +542,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Success State」组件/效果：突出成功图标、订单号、金额，并提供查看订单和返回首页按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="支付成功页">
-<div class="preview success"><div class="state successState">✓</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="支付成功页">
+<div class="preview preview-success"><div class="state successState">✓</div></div>
 <div class="meta"><div class="head"><span class="name">Success State</span><span class="tag">成功状态</span></div>
 <div class="desc">操作成功后的明确反馈。</div><div class="sceneLine">场景：支付成功页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -538,10 +553,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Text Input」组件/效果：输入邮箱或用户名，包含 Label、占位提示、校验错误和聚焦状态。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="账号登录表单">
-<div class="preview input"><label class="field">Email<input value="hello@example.com"/></label></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="账号登录表单">
+<div class="preview preview-input"><label class="field">Email<input value="hello@example.com"/></label></div>
 <div class="meta"><div class="head"><span class="name">Text Input</span><span class="tag">文本输入框</span></div>
 <div class="desc">最基础的文本输入组件。</div><div class="sceneLine">场景：账号登录表单</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -549,10 +564,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Floating Label」组件/效果：输入内容后 Label 上浮，保证字段名称持续可见。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="移动端注册表单">
-<div class="preview floating"><label class="floatField"><span>Email</span><input value="elias@example.com"/></label></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="移动端注册表单">
+<div class="preview preview-floating"><label class="floatField"><span>Email</span><input value="elias@example.com"/></label></div>
 <div class="meta"><div class="head"><span class="name">Floating Label</span><span class="tag">浮动标签输入框</span></div>
 <div class="desc">输入时 Label 上浮。</div><div class="sceneLine">场景：移动端注册表单</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -560,10 +575,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Search Box」组件/效果：支持关键词搜索、快捷键 Ctrl/Cmd+K、清空按钮和最近搜索。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="知识库搜索">
-<div class="preview search"><div class="searchMini">⌕ <span>Search anything...</span><b>⌘K</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="知识库搜索">
+<div class="preview preview-search"><div class="searchMini">⌕ <span>Search anything...</span><b>⌘K</b></div></div>
 <div class="meta"><div class="head"><span class="name">Search Box</span><span class="tag">搜索框</span></div>
 <div class="desc">带搜索图标和清空按钮。</div><div class="sceneLine">场景：知识库搜索</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -571,10 +586,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Select」组件/效果：使用下拉框选择负责人、优先级或项目空间。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="创建任务表单">
-<div class="preview select"><div class="selectMini">Design system <b>⌄</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="创建任务表单">
+<div class="preview preview-select"><div class="selectMini">Design system <b>⌄</b></div></div>
 <div class="meta"><div class="head"><span class="name">Select</span><span class="tag">选择器</span></div>
 <div class="desc">单选下拉选择。</div><div class="sceneLine">场景：创建任务表单</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -582,10 +597,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Multi Select」组件/效果：用户可同时选择 React、Vue、TypeScript 等多个标签，并以 Chip 显示。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="技术标签选择">
-<div class="preview multiselect"><div class="multi"><span>React ×</span><span>Vue ×</span><span>CSS ×</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="技术标签选择">
+<div class="preview preview-multiselect"><div class="multi"><span>React ×</span><span>Vue ×</span><span>CSS ×</span></div></div>
 <div class="meta"><div class="head"><span class="name">Multi Select</span><span class="tag">多选选择器</span></div>
 <div class="desc">标签化展示多个选项。</div><div class="sceneLine">场景：技术标签选择</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -593,10 +608,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Checkbox」组件/效果：勾选读取、写入、导出、管理成员等多个独立权限。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="权限配置">
-<div class="preview checkbox"><div class="check"><b>✓</b><span>Remember me</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="权限配置">
+<div class="preview preview-checkbox"><div class="check"><b>✓</b><span>Remember me</span></div></div>
 <div class="meta"><div class="head"><span class="name">Checkbox</span><span class="tag">复选框</span></div>
 <div class="desc">布尔/多选输入。</div><div class="sceneLine">场景：权限配置</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -604,10 +619,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Radio Group」组件/效果：用户在月付和年付之间单选，年付旁标注节省金额。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="套餐周期选择">
-<div class="preview radio"><div class="radio"><b>◉</b><span>Monthly</span><i>○</i><span>Yearly</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="套餐周期选择">
+<div class="preview preview-radio"><div class="radio"><b>◉</b><span>Monthly</span><i>○</i><span>Yearly</span></div></div>
 <div class="meta"><div class="head"><span class="name">Radio Group</span><span class="tag">单选组</span></div>
 <div class="desc">一组互斥选项。</div><div class="sceneLine">场景：套餐周期选择</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -615,10 +630,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Switch」组件/效果：用于开启通知、自动保存、暗黑模式等即时生效配置。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="功能开关设置">
-<div class="preview switch"><div class="switch"><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="功能开关设置">
+<div class="preview preview-switch"><div class="switch"><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Switch</span><span class="tag">开关</span></div>
 <div class="desc">开启/关闭某个状态。</div><div class="sceneLine">场景：功能开关设置</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -626,10 +641,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Slider」组件/效果：用滑块调节 Temperature、Top P 或音量等连续参数，并实时显示数值。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI 参数面板">
-<div class="preview slider"><div class="slider"><i></i><b></b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI 参数面板">
+<div class="preview preview-slider"><div class="slider"><i></i><b></b></div></div>
 <div class="meta"><div class="head"><span class="name">Slider</span><span class="tag">滑块</span></div>
 <div class="desc">在连续区间内选择数值。</div><div class="sceneLine">场景：AI 参数面板</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -637,10 +652,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Date Picker」组件/效果：选择开始日期和结束日期，支持最近 7 天、30 天等快捷项。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="报表时间范围">
-<div class="preview datepicker"><div class="calendar"><b>August 2026</b><div>3 4 5 6 7<br/>10 11 <strong>12</strong> 13 14</div></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="报表时间范围">
+<div class="preview preview-datepicker"><div class="calendar"><b>August 2026</b><div>3 4 5 6 7<br/>10 11 <strong>12</strong> 13 14</div></div></div>
 <div class="meta"><div class="head"><span class="name">Date Picker</span><span class="tag">日期选择器</span></div>
 <div class="desc">选择日期或日期区间。</div><div class="sceneLine">场景：报表时间范围</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -648,10 +663,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Color Picker」组件/效果：用户选择品牌主色，同时实时预览按钮、链接和高亮状态。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="主题定制">
-<div class="preview colorpicker"><div class="colors"><i></i><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="主题定制">
+<div class="preview preview-colorpicker"><div class="colors"><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Color Picker</span><span class="tag">颜色选择器</span></div>
 <div class="desc">选择颜色值。</div><div class="sceneLine">场景：主题定制</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -659,10 +674,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「File Upload」组件/效果：支持拖拽 PDF/Word/Markdown，显示文件大小、进度和格式校验。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="知识库文档上传">
-<div class="preview upload"><div class="upload">⇧<b>Drop files here</b><span>or click to browse</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="知识库文档上传">
+<div class="preview preview-upload"><div class="upload">⇧<b>Drop files here</b><span>or click to browse</span></div></div>
 <div class="meta"><div class="head"><span class="name">File Upload</span><span class="tag">文件上传</span></div>
 <div class="desc">拖拽或点击上传文件。</div><div class="sceneLine">场景：知识库文档上传</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -670,10 +685,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「OTP Input」组件/效果：6 位验证码分格输入，支持自动聚焦、粘贴和倒计时重新发送。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="短信验证码登录">
-<div class="preview otp"><div class="otp"><b>4</b><b>8</b><b>2</b><b>•</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="短信验证码登录">
+<div class="preview preview-otp"><div class="otp"><b>4</b><b>8</b><b>2</b><b>•</b></div></div>
 <div class="meta"><div class="head"><span class="name">OTP Input</span><span class="tag">验证码输入</span></div>
 <div class="desc">分格输入短信/邮箱验证码。</div><div class="sceneLine">场景：短信验证码登录</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -681,10 +696,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Password Strength」组件/效果：输入密码时实时显示弱/中/强，并列出长度、数字、特殊字符要求。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="注册密码设置">
-<div class="preview password"><div class="password"><input value="••••••••"/><i></i><i></i><span></span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="注册密码设置">
+<div class="preview preview-password"><div class="password"><input value="••••••••"/><i></i><i></i><span></span></div></div>
 <div class="meta"><div class="head"><span class="name">Password Strength</span><span class="tag">密码强度</span></div>
 <div class="desc">密码输入与强度反馈。</div><div class="sceneLine">场景：注册密码设置</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -692,10 +707,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Card UI」组件/效果：每张卡片展示商品图、名称、价格、评分、库存和加入购物车按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="电商商品列表">
-<div class="preview cardui"><div class="product"><div></div><b>Wireless Headphones</b><span>¥699</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="电商商品列表">
+<div class="preview preview-cardui"><div class="product"><div></div><b>Wireless Headphones</b><span>¥699</span></div></div>
 <div class="meta"><div class="head"><span class="name">Card UI</span><span class="tag">卡片布局</span></div>
 <div class="desc">将信息组织到独立卡片。</div><div class="sceneLine">场景：电商商品列表</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -703,10 +718,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Dashboard」组件/效果：展示调用量、成功率、平均延迟、Token 成本、工具调用排行和异常趋势。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI Agent 运营看板">
-<div class="preview dashboard"><div class="dash"><div><b>12.3k</b><span>Users</span></div><div><b>¥45k</b><span>Revenue</span></div><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI Agent 运营看板">
+<div class="preview preview-dashboard"><div class="dash"><div><b>12.3k</b><span>Users</span></div><div><b>¥45k</b><span>Revenue</span></div><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Dashboard</span><span class="tag">仪表盘</span></div>
 <div class="desc">集中呈现指标和趋势。</div><div class="sceneLine">场景：AI Agent 运营看板</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -714,10 +729,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Data Table」组件/效果：表格包含头像、用户名、角色、状态、最后登录时间，支持排序、筛选和批量操作。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="用户管理后台">
-<div class="preview table"><div class="tableMini"><b>Name　Status　Role</b><span>Alice　● Active　Admin</span><span>Bob　● Active　User</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="用户管理后台">
+<div class="preview preview-table"><div class="tableMini"><b>Name　Status　Role</b><span>Alice　● Active　Admin</span><span>Bob　● Active　User</span></div></div>
 <div class="meta"><div class="head"><span class="name">Data Table</span><span class="tag">数据表格</span></div>
 <div class="desc">结构化展示大量数据。</div><div class="sceneLine">场景：用户管理后台</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -725,10 +740,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Stat Card」组件/效果：使用四张指标卡展示 GMV、订单数、新增用户、转化率，并附环比变化。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="业务指标总览">
-<div class="preview stat"><div class="stat"><span>Monthly revenue</span><b>¥68,240</b><i>+12.4%</i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="业务指标总览">
+<div class="preview preview-stat"><div class="stat"><span>Monthly revenue</span><b>¥68,240</b><i>+12.4%</i></div></div>
 <div class="meta"><div class="head"><span class="name">Stat Card</span><span class="tag">指标卡</span></div>
 <div class="desc">突出一个核心指标。</div><div class="sceneLine">场景：业务指标总览</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -736,10 +751,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Badge」组件/效果：用不同颜色徽标表示 Running、Pending、Failed、VIP、Beta 等状态。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="状态系统">
-<div class="preview badge"><div class="badges"><b>NEW</b><span>PRO</span><i>12</i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="状态系统">
+<div class="preview preview-badge"><div class="badges"><b>NEW</b><span>PRO</span><i>12</i></div></div>
 <div class="meta"><div class="head"><span class="name">Badge</span><span class="tag">徽标</span></div>
 <div class="desc">用于状态、计数和分类。</div><div class="sceneLine">场景：状态系统</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -747,10 +762,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Avatar Group」组件/效果：显示前 3-4 个成员头像，剩余人数以 +N 展示，悬停查看姓名。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="协作项目成员">
-<div class="preview avatars"><div class="avatars"><i>A</i><i>B</i><i>C</i><i>+5</i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="协作项目成员">
+<div class="preview preview-avatars"><div class="avatars"><i>A</i><i>B</i><i>C</i><i>+5</i></div></div>
 <div class="meta"><div class="head"><span class="name">Avatar Group</span><span class="tag">头像组</span></div>
 <div class="desc">展示协作成员。</div><div class="sceneLine">场景：协作项目成员</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -758,10 +773,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Timeline」组件/效果：按时间展示已下单、已付款、已发货、运输中、已签收。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="订单状态追踪">
-<div class="preview timeline"><div class="timeline"><i></i><span>Created project</span><i></i><span>Deployed</span><i></i><span>Online</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="订单状态追踪">
+<div class="preview preview-timeline"><div class="timeline"><i></i><span>Created project</span><i></i><span>Deployed</span><i></i><span>Online</span></div></div>
 <div class="meta"><div class="head"><span class="name">Timeline</span><span class="tag">时间线</span></div>
 <div class="desc">按时间顺序展示事件。</div><div class="sceneLine">场景：订单状态追踪</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -769,10 +784,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Kanban」组件/效果：按 Todo、Doing、Review、Done 分列展示任务卡，并支持拖拽。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="研发任务管理">
-<div class="preview kanban"><div class="kanban"><section><b>Todo</b><i></i><i></i></section><section><b>Doing</b><i></i></section><section><b>Done</b><i></i></section></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="研发任务管理">
+<div class="preview preview-kanban"><div class="kanban"><section><b>Todo</b><i></i><i></i></section><section><b>Doing</b><i></i></section><section><b>Done</b><i></i></section></div></div>
 <div class="meta"><div class="head"><span class="name">Kanban</span><span class="tag">看板</span></div>
 <div class="desc">卡片按状态列组织。</div><div class="sceneLine">场景：研发任务管理</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -780,10 +795,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Tree View」组件/效果：展示 src、components、pages 等目录，可展开/折叠并高亮当前文件。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="在线 IDE 文件树">
-<div class="preview tree"><div class="tree">▾ src<br/>　├─ components<br/>　├─ pages<br/>　└─ app.tsx</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="在线 IDE 文件树">
+<div class="preview preview-tree"><div class="tree">▾ src<br/>　├─ components<br/>　├─ pages<br/>　└─ app.tsx</div></div>
 <div class="meta"><div class="head"><span class="name">Tree View</span><span class="tag">树形视图</span></div>
 <div class="desc">展示层级数据结构。</div><div class="sceneLine">场景：在线 IDE 文件树</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -791,10 +806,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Accordion」组件/效果：问题作为标题，点击展开答案，一次可只展开一个或多个。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="FAQ 帮助中心">
-<div class="preview accordion"><div class="acc"><b>Section 1　⌃</b><p>Expanded content</p><span>Section 2　⌄</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="FAQ 帮助中心">
+<div class="preview preview-accordion"><div class="acc"><b>Section 1　⌃</b><p>Expanded content</p><span>Section 2　⌄</span></div></div>
 <div class="meta"><div class="head"><span class="name">Accordion</span><span class="tag">手风琴</span></div>
 <div class="desc">折叠展开多个信息区块。</div><div class="sceneLine">场景：FAQ 帮助中心</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -802,10 +817,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Carousel」组件/效果：轮播展示 3-5 个新品或活动 Banner，支持指示点和左右切换。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="首页产品展示">
-<div class="preview carousel"><div class="carousel"><i>‹</i><div></div><b>›</b><span>● ○ ○</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="首页产品展示">
+<div class="preview preview-carousel"><div class="carousel"><i>‹</i><div></div><b>›</b><span>● ○ ○</span></div></div>
 <div class="meta"><div class="head"><span class="name">Carousel</span><span class="tag">轮播图</span></div>
 <div class="desc">横向轮播展示内容。</div><div class="sceneLine">场景：首页产品展示</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -813,10 +828,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Code Block」组件/效果：展示 curl、JavaScript、Python 示例代码，带语言切换和复制按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="API 文档">
-<div class="preview code"><pre class="code">&lt;button&gt;
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="API 文档">
+<div class="preview preview-code"><pre class="code">&lt;button&gt;
   Deploy
 &lt;/button&gt;</pre></div>
 <div class="meta"><div class="head"><span class="name">Code Block</span><span class="tag">代码块</span></div>
@@ -826,10 +841,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Pricing Table」组件/效果：并排展示 Free、Pro、Team 三种套餐，突出推荐套餐和功能差异。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="SaaS 套餐页">
-<div class="preview pricing"><div class="pricing"><span>Free</span><b>$0</b><button>Start</button></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="SaaS 套餐页">
+<div class="preview preview-pricing"><div class="pricing"><span>Free</span><b>$0</b><button>Start</button></div></div>
 <div class="meta"><div class="head"><span class="name">Pricing Table</span><span class="tag">价格表</span></div>
 <div class="desc">套餐对比常用组件。</div><div class="sceneLine">场景：SaaS 套餐页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -837,10 +852,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Chat Bubble」组件/效果：用户消息右侧、AI 消息左侧，支持头像、时间、引用、代码块和复制。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI 对话页面">
-<div class="preview chat"><div class="chat"><span>Hello!</span><b>How can I help?</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI 对话页面">
+<div class="preview preview-chat"><div class="chat"><span>Hello!</span><b>How can I help?</b></div></div>
 <div class="meta"><div class="head"><span class="name">Chat Bubble</span><span class="tag">聊天气泡</span></div>
 <div class="desc">对话消息的常见视觉结构。</div><div class="sceneLine">场景：AI 对话页面</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -848,10 +863,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Responsive Design」组件/效果：桌面端为多列布局，平板自动收缩，手机端改为单列并折叠导航。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="营销官网">
-<div class="preview responsive"><div class="devices"><i></i><b></b><span></span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="营销官网">
+<div class="preview preview-responsive"><div class="devices"><i></i><b></b><span></span></div></div>
 <div class="meta"><div class="head"><span class="name">Responsive Design</span><span class="tag">响应式设计</span></div>
 <div class="desc">适配桌面、平板和手机。</div><div class="sceneLine">场景：营销官网</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -859,10 +874,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「CSS Grid」组件/效果：使用 12 列网格排列图表、指标卡和活动列表，并允许不同卡片跨列。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="数据分析首页">
-<div class="preview grid"><div class="gridMini"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="数据分析首页">
+<div class="preview preview-grid"><div class="gridMini"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">CSS Grid</span><span class="tag">网格布局</span></div>
 <div class="desc">二维布局系统。</div><div class="sceneLine">场景：数据分析首页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -870,10 +885,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Flexbox」组件/效果：左侧标题，中间搜索框，右侧按钮组；窗口缩小时保持合理对齐和换行。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="工具栏">
-<div class="preview flex"><div class="flexMini"><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="工具栏">
+<div class="preview preview-flex"><div class="flexMini"><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Flexbox</span><span class="tag">弹性布局</span></div>
 <div class="desc">一维排列和对齐。</div><div class="sceneLine">场景：工具栏</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -881,10 +896,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Masonry」组件/效果：不同高度图片以 Pinterest 式瀑布流排列，滚动持续加载。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="图片灵感社区">
-<div class="preview masonry"><div class="masonry"><i></i><i></i><i></i><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="图片灵感社区">
+<div class="preview preview-masonry"><div class="masonry"><i></i><i></i><i></i><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Masonry</span><span class="tag">瀑布流</span></div>
 <div class="desc">Pinterest 式不等高卡片排列。</div><div class="sceneLine">场景：图片灵感社区</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -892,10 +907,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Split Screen」组件/效果：左侧展示产品插画和品牌文案，右侧放登录/注册表单。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="登录页">
-<div class="preview split"><div class="split"><i></i><b></b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="登录页">
+<div class="preview preview-split"><div class="split"><i></i><b></b></div></div>
 <div class="meta"><div class="head"><span class="name">Split Screen</span><span class="tag">分屏布局</span></div>
 <div class="desc">左右或上下双区域。</div><div class="sceneLine">场景：登录页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -903,10 +918,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Sticky Header」组件/效果：滚动长表格时表头固定在顶部，列名始终可见。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="数据表格页面">
-<div class="preview sticky"><div class="stickyMini"><b>Sticky Header</b><i></i><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="数据表格页面">
+<div class="preview preview-sticky"><div class="stickyMini"><b>Sticky Header</b><i></i><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Sticky Header</span><span class="tag">吸顶头部</span></div>
 <div class="desc">滚动后保持在视口顶部。</div><div class="sceneLine">场景：数据表格页面</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -914,10 +929,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Floating Action Button」组件/效果：右下角悬浮“+”作为主要操作，点击创建新笔记。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="移动端笔记应用">
-<div class="preview fab"><div class="fab">＋</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="移动端笔记应用">
+<div class="preview preview-fab"><div class="fab">＋</div></div>
 <div class="meta"><div class="head"><span class="name">Floating Action Button</span><span class="tag">悬浮操作按钮</span></div>
 <div class="desc">固定在角落的主操作按钮。</div><div class="sceneLine">场景：移动端笔记应用</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -925,10 +940,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Dock」组件/效果：页面底部放 GitHub、项目、博客、邮箱等图标，Hover 时放大。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="个人作品集快捷栏">
-<div class="preview dock"><div class="dock"><i>⌂</i><i>⌕</i><i>♡</i><i>⚙</i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="个人作品集快捷栏">
+<div class="preview preview-dock"><div class="dock"><i>⌂</i><i>⌕</i><i>♡</i><i>⚙</i></div></div>
 <div class="meta"><div class="head"><span class="name">Dock</span><span class="tag">Dock 栏</span></div>
 <div class="desc">macOS 风格的悬浮快捷入口。</div><div class="sceneLine">场景：个人作品集快捷栏</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -936,10 +951,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Centered Container」组件/效果：内容最大宽度控制在 720-900px，左右留白保证阅读舒适。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="博客正文页">
-<div class="preview container"><div class="containerMini"><b>Centered content</b><span>max-width: 1200px</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="博客正文页">
+<div class="preview preview-container"><div class="containerMini"><b>Centered content</b><span>max-width: 1200px</span></div></div>
 <div class="meta"><div class="head"><span class="name">Centered Container</span><span class="tag">居中容器</span></div>
 <div class="desc">控制页面最大宽度和留白。</div><div class="sceneLine">场景：博客正文页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -947,10 +962,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Aspect Ratio」组件/效果：封面始终保持 16:9，避免不同尺寸图片导致布局跳动。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="视频内容卡片">
-<div class="preview ratio"><div class="ratio">16 : 9</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="视频内容卡片">
+<div class="preview preview-ratio"><div class="ratio">16 : 9</div></div>
 <div class="meta"><div class="head"><span class="name">Aspect Ratio</span><span class="tag">固定宽高比</span></div>
 <div class="desc">保持媒体或卡片比例。</div><div class="sceneLine">场景：视频内容卡片</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -958,21 +973,21 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Hover Effect」组件/效果：鼠标经过时卡片轻微上浮、阴影加深，并出现“查看项目”按钮。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="项目作品卡片">
-<div class="preview hover"><button class="hoverBtn">Hover me</button></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="项目作品卡片">
+<div class="preview preview-hover"><button class="hoverBtn">Hover me</button></div>
 <div class="meta"><div class="head"><span class="name">Hover Effect</span><span class="tag">悬浮效果</span></div>
 <div class="desc">鼠标经过时产生反馈。</div><div class="sceneLine">场景：项目作品卡片</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
 <article class="card" data-cat="motion" data-key="transition 过渡" data-prompt="场景：侧边栏展开收起。
 
-请围绕这个真实业务场景设计「Transition」组件/效果：宽度、文字透明度和图标位置平滑过渡，避免突然跳变。
+请围绕这个真实业务场景设计「Transition」组件/效果：桌面端切换紧凑/展开布局，移动端侧栏通过 translateX 进入；文字和图标只用 transform 与 opacity 过渡，避免宽度动画造成页面抖动。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="侧边栏展开收起">
-<div class="preview transition"><div class="transitionMini"><b>Before</b><span>→</span><i>After</i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="侧边栏展开收起">
+<div class="preview preview-transition"><div class="transitionMini"><b>Before</b><span>→</span><i>After</i></div></div>
 <div class="meta"><div class="head"><span class="name">Transition</span><span class="tag">过渡动画</span></div>
 <div class="desc">让属性变化平滑发生。</div><div class="sceneLine">场景：侧边栏展开收起</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -980,32 +995,32 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Micro-interaction」组件/效果：点击后爱心缩放、填色并出现轻微粒子反馈，同时数字 +1。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="点赞按钮">
-<div class="preview micro"><div class="heart">♥</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="点赞按钮">
+<div class="preview preview-micro"><button aria-pressed="false" class="likeButton" data-demo-action="like" type="button"><span class="heart">♥</span><b>128</b></button></div>
 <div class="meta"><div class="head"><span class="name">Micro-interaction</span><span class="tag">微交互</span></div>
 <div class="desc">点赞、收藏等细节反馈。</div><div class="sceneLine">场景：点赞按钮</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
 <article class="card" data-cat="motion visual" data-key="parallax 视差" data-prompt="场景：品牌 Landing Page。
 
-请围绕这个真实业务场景设计「Parallax」组件/效果：背景图、人物、文字以不同速度移动，制造空间纵深。
+请围绕这个真实业务场景设计「Parallax」组件/效果：背景、主体、文字根据滚动位置以小幅不同速度移动，制造空间纵深；触屏设备关闭跟随指针效果，减少动态偏好下完全禁用视差。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="品牌 Landing Page">
-<div class="preview parallax"><div class="scene"><i></i><b></b><span>☀</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="品牌 Landing Page">
+<div class="preview preview-parallax"><div class="scene"><i></i><b></b><span>☀</span></div></div>
 <div class="meta"><div class="head"><span class="name">Parallax</span><span class="tag">视差滚动</span></div>
 <div class="desc">不同层以不同速度移动。</div><div class="sceneLine">场景：品牌 Landing Page</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
 <article class="card" data-cat="motion" data-key="scroll reveal 滚动出现" data-prompt="场景：公司官网内容区。
 
-请围绕这个真实业务场景设计「Scroll Reveal」组件/效果：卡片进入视口时依次从下方淡入，上滑幅度控制在 12-24px。
+请围绕这个真实业务场景设计「Scroll Reveal」组件/效果：卡片首次进入视口时依次从下方淡入，上滑幅度控制在 12-24px；使用 IntersectionObserver，完成后停止观察并在组件卸载时清理。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="公司官网内容区">
-<div class="preview reveal"><div class="reveal"><span>Scroll</span><b>Reveal</b></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="公司官网内容区">
+<div class="preview preview-reveal"><div class="reveal"><span>Scroll</span><b>Reveal</b></div></div>
 <div class="meta"><div class="head"><span class="name">Scroll Reveal</span><span class="tag">滚动出现</span></div>
 <div class="desc">元素进入视口时淡入/上移。</div><div class="sceneLine">场景：公司官网内容区</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1013,10 +1028,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Shimmer」组件/效果：骨架块上有浅色高光从左到右扫过，提示数据正在加载。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="内容占位加载">
-<div class="preview shimmer"><div class="shimmer"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="内容占位加载">
+<div class="preview preview-shimmer"><div class="shimmer"></div></div>
 <div class="meta"><div class="head"><span class="name">Shimmer</span><span class="tag">流光动画</span></div>
 <div class="desc">高光扫过元素表面。</div><div class="sceneLine">场景：内容占位加载</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1024,10 +1039,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Pulse」组件/效果：绿色圆点周期性扩散光圈，表示服务在线或设备正在工作。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="在线状态指示">
-<div class="preview pulse"><div class="pulse"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="在线状态指示">
+<div class="preview preview-pulse"><div class="pulseStatus"><div class="pulse"></div><span>服务运行正常</span></div></div>
 <div class="meta"><div class="head"><span class="name">Pulse</span><span class="tag">脉冲动画</span></div>
 <div class="desc">轻微缩放或发光循环。</div><div class="sceneLine">场景：在线状态指示</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1035,32 +1050,32 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Marquee」组件/效果：品牌 Logo 或技术栈名称持续横向滚动，并在 Hover 时暂停。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="合作品牌墙">
-<div class="preview marquee"><div class="marquee"><span>REACT · TYPESCRIPT · CSS · UI · </span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="合作品牌墙">
+<div class="preview preview-marquee"><div class="marquee"><div class="marqueeTrack"><span>REACT · TYPESCRIPT · CSS · UI · FIGMA ·</span><span aria-hidden="true">REACT · TYPESCRIPT · CSS · UI · FIGMA ·</span></div></div></div>
 <div class="meta"><div class="head"><span class="name">Marquee</span><span class="tag">跑马灯</span></div>
 <div class="desc">内容持续横向滚动。</div><div class="sceneLine">场景：合作品牌墙</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
-<article class="card" data-cat="motion" data-key="lottie 动画" data-prompt="场景：支付完成动效。
+<article class="card" data-cat="motion feedback" data-key="success motion lottie 完成 成功 动画" data-prompt="场景：支付完成反馈。
 
-请围绕这个真实业务场景设计「Lottie Style」组件/效果：成功后播放 1-2 秒轻量矢量动画，随后进入订单信息。
+请围绕这个真实业务场景设计「Success Motion」组件/效果：支付成功后用 SVG 对勾描边与扩散圆环播放一次 600-900ms 的轻量动画，随后稳定显示订单号、金额和查看订单按钮；不要依赖外部 Lottie JSON。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="支付完成动效">
-<div class="preview lottie"><div class="orbit"><i></i><b></b></div></div>
-<div class="meta"><div class="head"><span class="name">Lottie Style</span><span class="tag">矢量动效</span></div>
-<div class="desc">常见轻量 JSON 矢量动画表现。</div><div class="sceneLine">场景：支付完成动效</div><div class="promptHint">点击查看 Prompt →</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="支付完成反馈">
+<div class="preview preview-lottie"><div aria-label="支付成功" class="successMotion">✓</div></div>
+<div class="meta"><div class="head"><span class="name">Success Motion</span><span class="tag">完成动效</span></div>
+<div class="desc">一次性完成动画与结果信息衔接。</div><div class="sceneLine">场景：支付完成反馈</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
 <article class="card" data-cat="motion" data-key="page transition 页面切换" data-prompt="场景：作品集路由切换。
 
 请围绕这个真实业务场景设计「Page Transition」组件/效果：页面切换时旧内容淡出，新内容轻微上移进入，保持节奏统一。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="作品集路由切换">
-<div class="preview pagetrans"><div class="pageTrans"><i>Page A</i><b>→</b><span>Page B</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="作品集路由切换">
+<div class="preview preview-pagetrans"><div class="pageTrans"><i>Page A</i><b>→</b><span>Page B</span></div></div>
 <div class="meta"><div class="head"><span class="name">Page Transition</span><span class="tag">页面切换</span></div>
 <div class="desc">页面切换时的淡入/滑动效果。</div><div class="sceneLine">场景：作品集路由切换</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1068,10 +1083,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Gradient」组件/效果：用品牌色渐变作为背景，中央放活动标题、说明和 CTA。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="活动 Banner">
-<div class="preview gradient"><div class="gradientBox"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="活动 Banner">
+<div class="preview preview-gradient"><div class="gradientBox"></div></div>
 <div class="meta"><div class="head"><span class="name">Gradient</span><span class="tag">渐变</span></div>
 <div class="desc">线性或径向颜色渐变。</div><div class="sceneLine">场景：活动 Banner</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1079,10 +1094,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Backdrop Blur」组件/效果：导航栏半透明并模糊背后内容，滚动页面时仍保持可读。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="顶部悬浮导航">
-<div class="preview backdrop"><div class="backdropBox"><i></i></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="顶部悬浮导航">
+<div class="preview preview-backdrop"><div class="backdropBox"><i></i></div></div>
 <div class="meta"><div class="head"><span class="name">Backdrop Blur</span><span class="tag">背景模糊</span></div>
 <div class="desc">毛玻璃常用底层效果。</div><div class="sceneLine">场景：顶部悬浮导航</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1090,10 +1105,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Box Shadow」组件/效果：通过柔和阴影把卡片从背景中抬起，避免过重黑影。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="浮层卡片">
-<div class="preview shadow"><div class="shadowBox"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="浮层卡片">
+<div class="preview preview-shadow"><div class="shadowBox"></div></div>
 <div class="meta"><div class="head"><span class="name">Box Shadow</span><span class="tag">盒阴影</span></div>
 <div class="desc">建立层级和悬浮感。</div><div class="sceneLine">场景：浮层卡片</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1101,10 +1116,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Border Radius」组件/效果：卡片、按钮、输入框统一使用 12-20px 圆角，形成柔和视觉语言。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="消费级 App 卡片">
-<div class="preview radius"><div class="radiusBox">Rounded</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="消费级 App 卡片">
+<div class="preview preview-radius"><div class="radiusBox">Rounded</div></div>
 <div class="meta"><div class="head"><span class="name">Border Radius</span><span class="tag">圆角</span></div>
 <div class="desc">控制卡片、按钮圆润程度。</div><div class="sceneLine">场景：消费级 App 卡片</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1112,10 +1127,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Whitespace」组件/效果：减少同屏信息量，通过大间距和留白突出核心标题与 CTA。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="高端 SaaS 首页">
-<div class="preview whitespace"><div class="spaceBox"><b>Whitespace</b><span>Less noise, more focus.</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="高端 SaaS 首页">
+<div class="preview preview-whitespace"><div class="spaceBox"><b>Whitespace</b><span>Less noise, more focus.</span></div></div>
 <div class="meta"><div class="head"><span class="name">Whitespace</span><span class="tag">留白</span></div>
 <div class="desc">提升信息可读性和高级感。</div><div class="sceneLine">场景：高端 SaaS 首页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1123,10 +1138,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Visual Hierarchy」组件/效果：标题、摘要、作者、正文、引用通过字号、粗细和颜色形成明确阅读顺序。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="新闻详情页">
-<div class="preview hierarchy"><div class="hier"><b>Title</b><strong>Subtitle</strong><span>Supporting text</span></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="新闻详情页">
+<div class="preview preview-hierarchy"><div class="hier"><b>Title</b><strong>Subtitle</strong><span>Supporting text</span></div></div>
 <div class="meta"><div class="head"><span class="name">Visual Hierarchy</span><span class="tag">视觉层级</span></div>
 <div class="desc">字号、粗细、颜色建立优先级。</div><div class="sceneLine">场景：新闻详情页</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1134,10 +1149,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Gradient Border」组件/效果：普通状态低调，AI/Pro 功能使用紫蓝渐变边框强调，但不铺满背景。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="AI 功能卡片">
-<div class="preview gradborder"><div class="gradBorder">Gradient Border</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="AI 功能卡片">
+<div class="preview preview-gradborder"><div class="gradBorder">Gradient Border</div></div>
 <div class="meta"><div class="head"><span class="name">Gradient Border</span><span class="tag">渐变边框</span></div>
 <div class="desc">用渐变突出卡片边缘。</div><div class="sceneLine">场景：AI 功能卡片</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1145,10 +1160,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Glow Effect」组件/效果：关键模型状态或主 CTA 使用蓝紫霓虹发光，其他元素保持克制。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="深色 AI 控制台">
-<div class="preview glow"><div class="glow">GLOW</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="深色 AI 控制台">
+<div class="preview preview-glow"><div class="glow">GLOW</div></div>
 <div class="meta"><div class="head"><span class="name">Glow Effect</span><span class="tag">发光效果</span></div>
 <div class="desc">霓虹或高亮元素常用。</div><div class="sceneLine">场景：深色 AI 控制台</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1156,10 +1171,10 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Noise Texture」组件/效果：纯色或渐变背景叠加极轻微颗粒纹理，减少数码塑料感。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="创意品牌官网">
-<div class="preview noise"><div class="noise">Texture</div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="创意品牌官网">
+<div class="preview preview-noise"><div class="noise">Texture</div></div>
 <div class="meta"><div class="head"><span class="name">Noise Texture</span><span class="tag">噪点纹理</span></div>
 <div class="desc">加入细微颗粒提升质感。</div><div class="sceneLine">场景：创意品牌官网</div><div class="promptHint">点击查看 Prompt →</div></div>
 </article>
@@ -1167,13 +1182,74 @@ article.card{cursor:pointer}
 
 请围绕这个真实业务场景设计「Mesh Gradient」组件/效果：背景使用多个柔和色块融合的 Mesh Gradient，前景保持高对比文字。
 
-界面要求：该效果必须服务于场景本身，而不是为了炫技；保持清晰的信息层级、合理留白、真实可用的文案与数据，并补齐 Hover、Focus、Disabled、Loading 等必要状态。如果场景适合移动端，请同时考虑移动端布局；如果适合后台系统，则优先桌面端信息密度。
+设计约束：先保证信息层级和任务完成路径，再应用该效果；使用真实中文文案与合理示例数据。只实现与该组件有关的默认、Hover、Focus、Active、Disabled、Loading、Empty、Error 状态，不要强塞无关状态。桌面端与移动端的布局取舍必须符合场景，并支持键盘操作、清晰焦点和足够的颜色对比。
 
-代码实现：React + TypeScript + Tailwind CSS。输出可直接运行的组件，不要使用无意义占位文字，不要只做一个孤立 Demo，要让它看起来像真实产品中的一部分。" data-scene="产品发布页 Hero">
-<div class="preview mesh"><div class="mesh"></div></div>
+代码实现：React + TypeScript + Tailwind CSS。输出完整、可直接运行的组件与必要示例数据，交互状态必须真实可操作；不要使用第三方组件库、外链图片、无意义占位文字或伪代码。动效仅使用 transform / opacity，并兼容 prefers-reduced-motion。" data-scene="产品发布页 Hero">
+<div class="preview preview-mesh"><div class="mesh"></div></div>
 <div class="meta"><div class="head"><span class="name">Mesh Gradient</span><span class="tag">网格渐变</span></div>
 <div class="desc">多个颜色节点融合的柔和渐变。</div><div class="sceneLine">场景：产品发布页 Hero</div><div class="promptHint">点击查看 Prompt →</div></div>
-</article></main>
+</article>
+<article class="card" data-cat="data visual" data-key="line chart 折线图 趋势图 analytics" data-prompt="场景：SaaS 经营分析页。
+
+设计一张可交互的「折线趋势图」：展示最近 30 天的活跃用户与付费转化率，包含清晰坐标、双序列图例、悬浮数据提示、时间范围切换和同比说明。
+
+设计约束：数据密集但不拥挤，颜色不能成为唯一的信息编码；补齐加载、无数据、接口错误和极端数值状态。移动端减少刻度并支持横向查看，键盘用户也能读取每个数据点。
+
+代码实现：React + TypeScript + Tailwind CSS。优先使用 SVG 自绘，不使用图表库；输出完整组件、类型定义和真实示例数据，兼容 prefers-reduced-motion。" data-scene="SaaS 经营分析页">
+<div class="preview preview-linechart"><div class="lineChart"><svg aria-label="最近 30 天活跃用户趋势" role="img" viewBox="0 0 220 100"><defs><linearGradient id="chartFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#7f87eb" stop-opacity=".32"/><stop offset="1" stop-color="#7f87eb" stop-opacity="0"/></linearGradient></defs><path class="gridLine" d="M5 25H215M5 50H215M5 75H215"/><path class="chartArea" d="M5 78L40 65L74 70L110 41L145 48L180 24L215 31V95H5Z"/><path class="chartLine" d="M5 78L40 65L74 70L110 41L145 48L180 24L215 31"/></svg></div></div>
+<div class="meta"><div class="head"><span class="name">Line Chart</span><span class="tag">折线趋势图</span></div><div class="desc">展示连续时间序列与变化趋势。</div><div class="sceneLine">场景：SaaS 经营分析页</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+<article class="card" data-cat="data visual" data-key="donut chart pie 环形图 占比" data-prompt="场景：云资源成本总览。
+
+设计一个「环形占比图」模块：展示计算、存储、网络和数据库的本月费用占比，中心显示总费用，右侧图例同时给出金额与百分比，并允许点击图例聚焦某一项。
+
+设计约束：类别不超过 5 个，小于 3% 的项目合并为其他；补齐加载、无数据和总和为零状态，提供可被读屏读取的数据表替代内容，不能只依赖颜色区分。
+
+代码实现：React + TypeScript + Tailwind CSS。使用 CSS conic-gradient 或 SVG，不使用图表库；输出可运行组件、真实示例数据和交互状态。" data-scene="云资源成本总览">
+<div class="preview preview-donutchart"><div class="donutChart"><div class="donutRing"></div><div class="donutLegend"><b>本月费用</b><span>计算资源 62%</span><span>其他资源 38%</span></div></div></div>
+<div class="meta"><div class="head"><span class="name">Donut Chart</span><span class="tag">环形占比图</span></div><div class="desc">表达有限类别之间的占比关系。</div><div class="sceneLine">场景：云资源成本总览</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+<article class="card" data-cat="form data interaction" data-key="filter toolbar 筛选栏 查询条件 filter bar" data-prompt="场景：订单管理列表。
+
+设计一个「组合筛选工具栏」：包含订单状态、日期范围、渠道、关键词搜索、已选条件标签、重置和查询按钮；筛选结果数量变化需要即时反馈，并支持保存常用筛选方案。
+
+设计约束：常用条件直接显示，低频条件收进更多筛选；标签可逐个移除，重置必须明确。移动端改为底部抽屉，不丢失未提交条件；补齐查询中、无结果和接口错误状态。
+
+代码实现：React + TypeScript + Tailwind CSS。输出完整表单状态、示例数据、筛选逻辑和键盘操作，不使用第三方组件库。" data-scene="订单管理列表">
+<div class="preview preview-filterbar"><div class="filterBarMini"><span>状态：待发货</span><span>近 30 天</span><b>查询 128</b></div></div>
+<div class="meta"><div class="head"><span class="name">Filter Toolbar</span><span class="tag">组合筛选栏</span></div><div class="desc">组织搜索、筛选、重置与结果反馈。</div><div class="sceneLine">场景：订单管理列表</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+<article class="card" data-cat="form interaction" data-key="login auth 登录 表单 authentication" data-prompt="场景：企业工作台登录页。
+
+设计一个「账号登录」模块：邮箱或手机号、密码显示切换、记住登录、忘记密码、企业单点登录入口和明确的提交反馈；登录失败时保留账号但清空密码。
+
+设计约束：标签始终可见，错误信息紧邻字段，不通过颜色单独表达错误；提交中防止重复点击，支持自动填充、Enter 提交、密码管理器和移动端安全区域。
+
+代码实现：React + TypeScript + Tailwind CSS。输出可运行组件、字段校验、提交中与失败状态；模拟请求即可，不记录或输出密码。" data-scene="企业工作台登录页">
+<div class="preview preview-login"><div class="loginMini"><b>登录工作台</b><span>name@company.com</span><span>输入密码</span><i>安全登录</i></div></div>
+<div class="meta"><div class="head"><span class="name">Login Form</span><span class="tag">账号登录</span></div><div class="desc">包含校验、提交反馈与安全细节。</div><div class="sceneLine">场景：企业工作台登录页</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+<article class="card" data-cat="feedback navigation data" data-key="notification center 通知中心 消息 unread" data-prompt="场景：协作平台通知中心。
+
+设计一个「通知中心」：按未读、提及我、系统消息分类，通知项包含来源、摘要、相对时间和已读状态；支持单条标记、全部已读、批量删除以及跳转到关联任务。
+
+设计约束：未读层级清晰但克制，长文本可展开；补齐首次加载、加载更多、空状态、请求失败和删除撤销。移动端使用全屏页面，桌面端使用侧边抽屉，并正确管理焦点。
+
+代码实现：React + TypeScript + Tailwind CSS。输出完整数据类型、分组逻辑、可操作状态与 aria-live 反馈，不使用第三方组件库。" data-scene="协作平台通知中心">
+<div class="preview preview-notification"><div class="noticeMini"><b>通知中心　3 未读</b><span>订单审批等待处理</span><span>项目成员提及了你</span><span>数据导出已完成</span></div></div>
+<div class="meta"><div class="head"><span class="name">Notification Center</span><span class="tag">通知中心</span></div><div class="desc">统一承载未读、分类与批量处理。</div><div class="sceneLine">场景：协作平台通知中心</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+<article class="card" data-cat="form interaction feedback" data-key="drag drop upload 拖拽上传 文件 队列" data-prompt="场景：素材管理批量上传。
+
+设计一个「拖拽上传队列」：支持点击选择与拖入多个文件，展示文件名、大小、类型校验、单项进度、失败重试、取消和全部完成摘要。
+
+设计约束：拖入可接受与不可接受文件时反馈不同；限制类型和大小并给出具体原因。键盘用户可以完成选择、移除和重试；补齐空队列、上传中、部分失败、离线和完成状态。
+
+代码实现：React + TypeScript + Tailwind CSS。使用原生 Drag and Drop 与 File API，输出完整组件和本地模拟上传逻辑；正确清理定时器与对象 URL。" data-scene="素材管理批量上传">
+<div class="preview preview-dropzone"><div class="dropZoneMini"><div><b>拖拽文件到这里</b><span>PNG、JPG 或 PDF，单个不超过 20 MB</span></div></div></div>
+<div class="meta"><div class="head"><span class="name">Drag & Drop Upload</span><span class="tag">拖拽上传</span></div><div class="desc">处理文件校验、进度、失败与重试。</div><div class="sceneLine">场景：素材管理批量上传</div><div class="promptHint">点击查看 Prompt →</div></div>
+</article>
+</main>
 <div class="empty" id="empty">没有匹配结果</div>
 </div>
 <div aria-hidden="true" class="promptModal" id="promptModal">
@@ -1183,6 +1259,9 @@ article.card{cursor:pointer}
 <div class="promptEyebrow">UI Prompt</div>
 <h2 id="promptTitle">Prompt</h2>
 <div class="promptMeta" id="promptMeta"></div><div class="promptScene" id="promptScene"></div>
+<label class="promptOptions" for="stackSelect">目标技术栈
+<select id="stackSelect"><option value="default">Prompt 原始技术栈</option><option value="html">原生 HTML + CSS + JavaScript</option><option value="react">React + TypeScript + Tailwind CSS</option><option value="vue">Vue 3 + TypeScript + Tailwind CSS</option></select>
+</label>
 <textarea id="promptText" readonly=""></textarea>
 <div class="promptActions">
 <button class="secondaryBtn" data-close-modal="" type="button">关闭</button>
@@ -1197,26 +1276,66 @@ const q=document.querySelector('#q'),count=document.querySelector('#count'),
 totalCount=document.querySelector('#totalCount'),empty=document.querySelector('#empty');
 const modal=document.querySelector('#promptModal'),promptTitle=document.querySelector('#promptTitle'),promptScene=document.querySelector('#promptScene'),
 promptMeta=document.querySelector('#promptMeta'),promptText=document.querySelector('#promptText'),
-copyPrompt=document.querySelector('#copyPrompt');
+copyPrompt=document.querySelector('#copyPrompt'),stackSelect=document.querySelector('#stackSelect'),
+motionToggle=document.querySelector('#motionToggle');
 let active='all';
+let currentCard=null,lastFocus=null;
 totalCount.textContent=cards.length;
 
+const stackLabels={
+  html:'原生 HTML + CSS + JavaScript（单文件、零依赖）',
+  react:'React + TypeScript + Tailwind CSS',
+  vue:'Vue 3 + TypeScript + Tailwind CSS'
+};
+
+function renderPrompt(){
+  if(!currentCard)return;
+  const raw=currentCard.dataset.prompt||'';
+  const stack=stackSelect.value;
+  promptText.value=stack==='default'?raw:`${raw}\n\n技术栈覆盖：请使用 ${stackLabels[stack]} 实现；若上文技术栈有冲突，以本行要求为准。`;
+}
+
 cards.forEach(card=>{
+  const name=card.querySelector('.name').textContent.trim();
+  card.tabIndex=0;
+  card.setAttribute('role','button');
+  card.setAttribute('aria-label',`查看 ${name} 的 Prompt`);
   const open=()=>{
-    const name=card.querySelector('.name').textContent.trim();
     const tag=card.querySelector('.tag').textContent.trim();
+    currentCard=card;lastFocus=document.activeElement;
     promptTitle.textContent=name;
     promptMeta.textContent=`${tag} · 可直接复制给 AI 生成 UI / 前端代码`; promptScene.textContent=`典型场景：${card.dataset.scene || ''}`;
-    promptText.value=card.dataset.prompt||'';
+    stackSelect.value='default';renderPrompt();
     modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
     document.body.style.overflow='hidden';
+    modal.querySelector('.promptClose').focus();
   };
   card.addEventListener('click',open);
+  card.addEventListener('keydown',e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();open();}});
 });
 
-function closeModal(){modal.classList.remove('open');document.body.style.overflow='';}
+function closeModal(){
+  if(!modal.classList.contains('open'))return;
+  modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';
+  if(lastFocus instanceof HTMLElement)lastFocus.focus();
+}
 document.querySelectorAll('[data-close-modal]').forEach(el=>el.addEventListener('click',closeModal));
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+stackSelect.addEventListener('change',renderPrompt);
+
+document.querySelectorAll('[data-demo-action="like"]').forEach(button=>button.addEventListener('click',e=>{
+  e.stopPropagation();
+  const active=button.classList.toggle('active');
+  button.setAttribute('aria-pressed',String(active));
+  button.querySelector('b').textContent=active?'129':'128';
+}));
+
+motionToggle.addEventListener('click',()=>{
+  const paused=document.body.classList.toggle('motion-paused');
+  motionToggle.textContent=paused?'继续动效':'暂停动效';
+  motionToggle.setAttribute('aria-pressed',String(paused));
+});
 
 copyPrompt.addEventListener('click',async()=>{
   try{await navigator.clipboard.writeText(promptText.value);}
