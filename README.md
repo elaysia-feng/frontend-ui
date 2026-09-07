@@ -5,11 +5,12 @@
 ## 特性
 
 - **单文件、零依赖**：整个图库就是一个 `frontend-ui.html`，无需构建、无需安装，双击即用。
-- **98 个组件**：覆盖 9 大分类的 UI 设计模式与组件样式。
+- **391 个组件**：覆盖 10 大分类的 UI 设计模式与组件样式。
 - **搜索 + 过滤**：支持关键词搜索，并按分类快速筛选。
 - **动效控制**：可统一暂停循环动效，并自动尊重系统“减少动态效果”设置。
 - **可切换技术栈**：Prompt 支持原生 HTML、React 和 Vue 技术栈覆盖。
 - **一键复制提示词**：点击卡片弹出详情，展示组件名称、典型场景和可直接复制的 AI 提示词。
+- **一键复制代码**：每个组件都附带可直接运行的 React + TypeScript + Tailwind CSS 实现代码，弹窗中切换「📋 Prompt / 💻 代码」即可查看复制。
 
 ## 快速开始
 
@@ -27,13 +28,15 @@ open frontend-ui.html    # macOS
 | --- | --- |
 | 设计风格 (style) | 玻璃拟态、新拟态、扁平、材质、极简、暗色、极光、黏土等风格 |
 | 导航 (navigation) | 顶部导航、侧边栏、面包屑、标签页、分页、步骤条、底部导航、命令面板、锚点等 |
-| 反馈 (feedback) | 弹窗、抽屉、下拉菜单、气泡提示、Popover、Toast、警告、Snackbar、骨架屏等 |
-| 表单 (form) | 输入框、浮动标签、搜索/下拉、多选、复选框、单选、开关、滑块等 |
-| 数据展示 (data) | 折线图、环形图、统计卡片、表格、列表等数据展示组件 |
-| 布局 (layout) | Bento、分栏等布局模式 |
-| 动效 (motion) | 进度条、加载动画、交互动效等 |
-| 视觉效果 (visual) | 各类视觉装饰效果 |
-| 交互 (interaction) | 交互组件与模式 |
+| 反馈 (feedback) | 弹窗、抽屉、下拉菜单、气泡提示、Popover、Toast、Snackbar、骨架屏、通知中心、向导、Tour、评论、对话气泡、@Mention、表情、404、维护页等 |
+| 表单 (form) | 基础输入、复选/单选/开关/滑块、日期/时间/范围、Cascader/Tree/Transfer/Segmented、RichText/Markdown/Block Editor、Color/Icon/Font/Emoji Picker、Signature/Star/Slider Range/Captcha/Autocomplete/PIN/Masked/Voice、Block/JSON/Cron/Code Diff/SQL/LaTeX/Hex Color Editor、Avatar Cropper/URL Preview/Phone Picker/Address Cascader、Gradient Picker/Image Annotation/PDF/Audio Waveform/Kanban/Form Builder/Mind Map/DB Table/Spreadsheet/Regex Tester 等 |
+| 数据展示 (data) | Bar/Area/Pie/Donut/Radar/Heatmap/Sankey/Funnel/Gauge/Candlestick/TreeMap/Stream/BoxPlot/Waterfall/KPI/Sparkline/Table/Calendar/Timeline/Activity/Trending/ProgressRing/LiveCounter/MiniStats/GeoHeatmap/Leaderboard/Pict/Score 等基础图表 + Combo/Dual Axis/Stacked&Range Area/Radial Bar/Waffle/Sunburst/Icicle/Treemap Advanced/Parallel Coordinates/Gantt/Waterfall Advanced/Violin/Histogram/Scatter+Trendline/Correlation Matrix/Heatmap Calendar/Force Network/Chord/Arc/Mind Map Tree/Org Chart/Word Cloud/Polar Area/Pictograph/Radar Filled/Marimekko/Population Pyramid/Slope/Bump Chart 等高级图表 |
+| 布局 (layout) | Bento、Masonry、CardStack、Carousel、3D Flip、Holy Grail、Dashboard、Magazine、Resizable、Sticky、Accordion、Multi-col、Aspect、Bento Pro、Split、Comparison 等 |
+| 动效 (motion) | Hover Button、Transition、Like、Parallax、Reveal、Shimmer、Pulse、Marquee、Success、Page Trans、Glitch、Liquid、Holographic、Particles、Blob、Spotlight、Sound Wave 等 |
+| 视觉效果 (visual) | Glass Card Pro、Gradient Mesh、Animated Gradient、Text Gradient、Sticker、Magnetic Button 等 |
+| 交互 (interaction) | Kanban、Calendar Month/Week、Timeline H、Drag&Drop、Resize、Swipe Card、Like Counter、Star Rating、Stepper、Sortable Header、Filter Chips、Chat Bot、Code Editor、Terminal、Markdown Preview、Diff、AI Image、Prompt Input、Streaming、Token Counter、Bottom Sheet、Pull Refresh、Swipe Delete、iOS Toggle、App Bar、FAB Speed Dial、Tab Bar、Action Sheet、Picker Wheel、Command Menu、Mega Menu、Anchor Nav 等 |
+| 移动端 (mobile) | iOS HIG 组件（Large Title、Search Bar、Context Menu、Action Sheet、Alert、Tab Bar with Badges、List Row、Settings Cell、Pull Down、Date Picker Wheel、Picker Inline、Page Indicator、Progress HUD）+ Material Design 3 组件（Top App Bar、Navigation Drawer/Rail、FAB Variants、Chip Set、Snackbar、Banner、Card Elevated、Text Field）+ Cross-platform（Safe Area、Bottom Tab、Search/Slider/Switch）等 |
+| 电商 (mobile interaction / form / data) | Mini Cart、Cart Item、Checkout Steps、Payment Method、Order Summary、Order Tracking、Shipping Method、Invoice、Discount Code、Product Card Pro/Horizontal、Image Gallery、SKU Selector、Price Tag、Flash Sale、Compare Bar、Coupon、Points、Sign-in Calendar、Membership Card、Referral Code、Address Card/Form、Logistics Tracker、Review Card 等 |
 
 ## 使用方式
 
