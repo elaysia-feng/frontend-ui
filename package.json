@@ -1,0 +1,10 @@
+{
+  "name": "frontend-ui-gallery",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "零依赖单文件前端 UI 图库：391 个组件 + 24 个整页模板",
+  "scripts": {
+    "build": "node build_pages.ts"
+  }
+}
